@@ -4,7 +4,8 @@ import {
   ChevronLeft as ChevronLeftIcon,
   ChevronRight as ChevronRightIcon,
   Group as GroupIcon,
-  Menu as MenuIcon
+  Menu as MenuIcon,
+  Logout as LogoutIcon
 } from '@mui/icons-material';
 import {
   AppBarProps as MuiAppBarProps, Avatar, Box,
@@ -42,7 +43,7 @@ const MENU_ITEMS = [
 
 export const Menu: React.FC = ({ children }) => {
   const theme = useTheme();
-  const { user } = useContext(AuthContext);
+  const { user, signOut } = useContext(AuthContext);
 
   const [open, setOpen] = useState(false);
 
@@ -113,6 +114,12 @@ export const Menu: React.FC = ({ children }) => {
               </ListItem>
             </NextLink>
           ))}
+          <ListItem button onClick={() => signOut()}>
+            <ListItemIcon>
+              <LogoutIcon />
+            </ListItemIcon>
+            <ListItemText primary="Logout" />
+          </ListItem>
         </List>
         <Divider />
       </Drawer>

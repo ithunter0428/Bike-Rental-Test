@@ -12,8 +12,8 @@ const Home: NextPage = () => {
       </Head>
 
       <Menu>
-        <h1>Bike Rentals</h1>
-        <p>Rent or cancel you rent for any bike anytime</p>
+        <h1>Welcome</h1>
+        <p>This is a simple app for bike rental</p>
       </Menu>
     </div>
   );

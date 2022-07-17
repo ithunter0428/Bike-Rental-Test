@@ -2,7 +2,6 @@ import { Box, Dialog, DialogContent, DialogTitle, Typography } from '@mui/materi
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { BikeForm } from '../components/bike-form';
-import { BikesFilteredList } from '../components/bikes-filtered-table';
 import { BikesRentals } from '../components/bikes-rentals';
 import { Menu } from '../components/menu';
 import useBoolean from '../hooks/use-boolean';

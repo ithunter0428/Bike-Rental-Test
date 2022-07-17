@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import {
   addDoc,
   collection,
@@ -93,4 +93,10 @@ export const login = async (email: string, password: string) => {
   const auth = getAuth(firebaseApp)
 
   return await signInWithEmailAndPassword(auth, email, password)
+};
+
+export const logout = async () => {
+  const auth = getAuth(firebaseApp)
+
+  return await signOut(auth)
 };

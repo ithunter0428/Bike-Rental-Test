@@ -1,11 +1,12 @@
 import Router from 'next/router';
-import { parseCookies, setCookie } from 'nookies';
+import { parseCookies, setCookie, destroyCookie } from 'nookies';
 import React, { createContext, useEffect, useState } from 'react';
 import { UserProperties } from '../models/user-model';
-import { getUserByEmail, login } from '../services/user-service';
+import { getUserByEmail, login, logout } from '../services/user-service';
 
 interface AuthContextProperties {
   signIn: (email: string, password: string) => Promise<void>;
+  signOut: () => Promise<void>;
   user: UserProperties;
 }
 
@@ -28,6 +29,23 @@ export const AuthProvider: React.FC = ({ children }) => {
         setUser(response as UserProperties);
 
         Router.push('/');
+      }
+    } catch (err) {
+      console.log(err);
+      alert('user not found');
+    }
+  }
+
+  async function signOut() {
+    try {
+      if (user) {
+        await logout();
+
+        destroyCookie(undefined, 'bikerentals.auth');
+
+        setUser({} as UserProperties);
+
+        Router.push('/sign-in');
       }
     } catch (err) {
       console.log(err);
@@ -58,7 +76,7 @@ export const AuthProvider: React.FC = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ signIn, user }}>
+    <AuthContext.Provider value={{ signIn, signOut, user }}>
       {children}
     </AuthContext.Provider>
   );
